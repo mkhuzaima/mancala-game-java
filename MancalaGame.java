@@ -232,8 +232,10 @@ public class MancalaGame {
         int winner = game.winner();
         if (winner == -1)
             System.out.println("It is a tie!");
+        else if (winner == 0)
+            System.out.println("Computer wins!");
         else
-            System.out.println("Player " + (winner + 1) + " wins!");
+            System.out.println(name + " wins!");
 
         input.close();
     }

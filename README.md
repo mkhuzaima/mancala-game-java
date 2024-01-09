@@ -303,5 +303,5 @@ Press enter to continue...
 |    |  5 |  0 |  0 |  0 |  0 |  4 |    |
 +----+----+----+----+----+----+----+----+
 
-Player 2 wins!
+Khuzaima wins!
 ```
