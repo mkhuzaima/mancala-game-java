@@ -1,21 +1,53 @@
 import java.util.Scanner;
-import java.util.Arrays;
 
+/**
+ * Represents a game of Mancala.
+ */
 public class MancalaGame {
+    /**
+     * The number of rows on the game board.
+     */
     private static final int ROWS = 2;
-    private static final int COLUMNS = 6;
-    private static final int PLAYER1 = 0;
-    private static final int PLAYER2 = 1;
-    // create a 2D array to represent the stones
-    private int[][] board = new int[ROWS][COLUMNS];
-    private int[] store = new int[2]; // store of each player
 
-    // constructor
+    /**
+     * The number of columns on the game board.
+     */
+    private static final int COLUMNS = 6;
+
+    /**
+     * The index of player 1.
+     */
+    private static final int PLAYER1 = 0;
+
+    /**
+     * The index of player 2.
+     */
+    private static final int PLAYER2 = 1;
+
+    /**
+     * The 2D array representing the stones on the game board.
+     */
+    private int[][] board = new int[ROWS][COLUMNS];
+
+    /**
+     * The stores of each player.
+     */
+    private int[] store = new int[2];
+
+
+
+    /**
+     * Constructor for MancalaGame.
+     * Initializes the game board.
+     */
     public MancalaGame() {
         initializeBoard();
     }
 
-    // initialize the board
+    /**
+     * Initializes the game board.
+     * Sets all pits to 4 stones and both stores to 0.
+     */
     public void initializeBoard() {
         // initialize the board
         for (int i = 0; i < ROWS; i++) {
@@ -27,6 +59,9 @@ public class MancalaGame {
         store[PLAYER2] = 0;
     }
 
+    /**
+     * Prints the current state of the game board to the console.
+     */
     public void printBoard() {
         System.out.println("+----+----+----+----+----+----+----+----+");
         System.out.print("|    |");
@@ -42,13 +77,21 @@ public class MancalaGame {
         System.out.println("+----+----+----+----+----+----+----+----+");
     }
 
-
+    /**
+     * Prints the game board with a header.
+     * The header includes the column numbers.
+     */
     private void printBoardWithHeader() {
         System.out.println("     |  1 |  2 |  3 |  4 |  5 |  6 |");
         printBoard();
     }
 
-    // check if the game is over
+    /**
+     * Checks if the game is over.
+     * The game is over if all the pits of one player are empty.
+     *
+     * @return true if the game is over, false otherwise
+     */
     public boolean isGameOver() {
         // if all the pits of one player are empty, the game is over
         boolean player1Empty = true;
@@ -62,7 +105,13 @@ public class MancalaGame {
         return player1Empty || player2Empty;
     }
 
-    // play the game
+    /**
+     * Plays the game for a given player and pit number.
+     *
+     * @param playerIndex The index of the player.
+     * @param pitNumber   The number of the pit.
+     * @return true if the player gets a second turn, false otherwise.
+     */
     public boolean play(int playerIndex, int pitNumber) {
 
         // convert pitNumber to index
@@ -99,6 +148,7 @@ public class MancalaGame {
                         if (stones == 0) {
                             secondTurn = true;
                         }
+                    // steal feature
                     } else if (board[0][i + 1] == 1 && board[1][i + 1] != 0) {
                         // move current player's stones to the store
                         store[row] += board[0][i + 1];
@@ -129,6 +179,7 @@ public class MancalaGame {
                         if (stones == 0) {
                             secondTurn = true;
                         }
+                    // steal feature
                     } else if (board[1][i - 1] == 1 && board[0][i - 1] != 0) {
                         // move current player's stones to the store
                         store[row] += board[1][i - 1];
@@ -148,7 +199,11 @@ public class MancalaGame {
         return secondTurn;
     }
 
-    // winner
+    /**
+     * Determines the winner of the game.
+     *
+     * @return The index of the winning player, or -1 if it's a draw.
+     */
     public int winner() {
         // it is guarranteed that the game is over
 
@@ -169,6 +224,11 @@ public class MancalaGame {
             return -1;
     }
 
+    /**
+     * The main method that runs the Mancala game.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         MancalaGame game = new MancalaGame();
 
